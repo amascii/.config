@@ -74,30 +74,25 @@ _G.packer_plugins = {
     path = "/Users/amasc/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
     url = "https://github.com/ellisonleao/gruvbox.nvim"
   },
-  ["jedi-vim"] = {
-    loaded = true,
-    path = "/Users/amasc/.local/share/nvim/site/pack/packer/start/jedi-vim",
-    url = "https://github.com/davidhalter/jedi-vim"
-  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/Users/amasc/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/Users/amasc/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,
     path = "/Users/amasc/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
-  ["seoul256.vim"] = {
+  ["plenary.nvim"] = {
     loaded = true,
-    path = "/Users/amasc/.local/share/nvim/site/pack/packer/start/seoul256.vim",
-    url = "https://github.com/junegunn/seoul256.vim"
-  },
-  ["tokyonight.nvim"] = {
-    loaded = true,
-    path = "/Users/amasc/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
-    url = "https://github.com/folke/tokyonight.nvim"
+    path = "/Users/amasc/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+    url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["vim-surround"] = {
     loaded = true,
