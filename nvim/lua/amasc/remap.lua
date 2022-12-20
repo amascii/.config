@@ -1,9 +1,10 @@
 local nnoremap = require("amasc.keymap").nnoremap
 local inoremap = require("amasc.keymap").inoremap
 
-nnoremap("<leader>p", "<cmd>Vex<CR>")
+
+vim.g.mapleader = " "
+nnoremap("<leader>pv", "<cmd>Ex<CR>")
 inoremap('"', '""<left>')
-inoremap("'", "''<left>")
 inoremap("(", "()<left>")
 inoremap("{", "{}<left>")
 inoremap("[", "[]<left>")
