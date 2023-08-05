@@ -5,13 +5,14 @@ lsp.preset("recommended")
 lsp.ensure_installed({
     "tsserver",
     "eslint",
-    "sumneko_lua",
+    "lua_ls",
     "rust_analyzer",
     "pyright",
+    "marksman"
 })
 
 -- Fix Undefined global 'vim'
-lsp.configure('sumneko_lua', {
+lsp.configure('lua_ls', {
     settings = {
         Lua = {
             diagnostics = {
@@ -55,7 +56,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>[", vim.diagnostic.goto_prev, opts)
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-  vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
+  vim.keymap.set("n", "<leader>8", vim.lsp.buf.rename, opts)
   vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 end)
 
