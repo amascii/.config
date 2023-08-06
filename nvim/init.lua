@@ -1,3 +1,17 @@
+--[[
+Neovim expects config files in `~/.config/nvim/`
+If `.config` already exists, just add the `nvim` folder inside
+
+General setting, remappings, and plugin management goes here
+We use Packer to install plugins; check out the Quickstart
+https://github.com/wbthomason/packer.nvim
+
+:so this file to run Packer commands (PackerInstall, PackerSync, etc.)
+
+Plugin settings go in `after/plugin/<plugin>.lua`
+File-specific settings go in `after/ftplugin/<file-type>.lua`
+--]]
+
 -- SETS GO HERE
 vim.opt.guicursor = ""
 
