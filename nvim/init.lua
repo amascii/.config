@@ -36,7 +36,6 @@ vim.g.mapleader = " "
 local map_opts = {noremap=true}
 -- set(mode, lhs, rhs, opts)
 vim.keymap.set("n", "<leader>pv", "<cmd>Ex<CR>", map_opts)
-vim.keymap.set("n", "<leader>r", "<cmd>!python %<CR>", map_opts)
 vim.keymap.set("i", '"', '""<left>', map_opts)
 vim.keymap.set("i", '(', '()<left>', map_opts)
 vim.keymap.set("i", '{', '{}<left>', map_opts)
@@ -54,7 +53,7 @@ require("packer").startup(function(use)
     use "marko-cerovac/material.nvim"
     -- brew install ripgrep
     use {
-        "nvim-telescope/telescope.nvim", tag = "0.1.0",
+        "nvim-telescope/telescope.nvim", tag = "0.1.2",
         -- or                            , branch = "0.1.x",
         requires = { {"nvim-lua/plenary.nvim"} }
     }
