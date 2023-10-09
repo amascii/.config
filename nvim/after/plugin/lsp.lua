@@ -1,72 +1,59 @@
-local lsp = require("lsp-zero")
+local lspconfig = require("lspconfig")
+local lsp_defaults = lspconfig.util.default_config
 
-lsp.preset("recommended")
+lsp_defaults.capabilities = vim.tbl_deep_extend(
+  "force",
+  lsp_defaults.capabilities,
+  require("cmp_nvim_lsp").default_capabilities()
+)
 
-lsp.ensure_installed({
-    "tsserver",
-    "eslint",
-    "lua_ls",
-    "rust_analyzer",
-    "pyright",
-    "marksman"
+vim.api.nvim_create_autocmd("LspAttach", {
+  desc = "LSP actions",
+  callback = function(event)
+    local opts = {buffer = event.buf}
+
+    vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+    vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+    -- vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+    -- vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+    -- vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
+    vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+    vim.keymap.set("n", "<leader>8", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+    vim.keymap.set({"n", "x"}, "<leader>v", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
+    vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+    vim.keymap.set("n", "<leader>[", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
+    vim.keymap.set("n", "<leader>]", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
+    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
+    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+  end
 })
 
--- Fix Undefined global 'vim'
-lsp.configure('lua_ls', {
+local default_setup = function(server)
+  lspconfig[server].setup({})
+end
+
+require("mason").setup({})
+require("mason-lspconfig").setup({
+  ensure_installed = {
+    "lua_ls",
+    "pyright",
+    "gopls",
+    "ltex",
+    "eslint",
+    "marksman",
+  },
+  handlers = {default_setup},
+})
+
+-- Fix Undefined global "vim"
+lspconfig.lua_ls.setup {
     settings = {
         Lua = {
             diagnostics = {
-                globals = { 'vim' }
+                globals = { "vim" }
             }
         }
     }
-})
-
-local cmp = require("cmp")
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
-local cmp_mappings = lsp.defaults.cmp_mappings({
-    ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-    ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-    ["<C-y>"] = cmp.mapping.confirm({select = true}),
-    ["<C-Space>"] = cmp.mapping.complete(),
-})
-
-lsp.set_preferences({
-    sign_icons = {
-        error = "E",
-        warn = "W",
-        hint = "H",
-        info = "I"
-    }
-})
-
-lsp.on_attach(function(client, bufnr)
-  local opts = {buffer = bufnr, remap = false}
-
-  -- if client.name == "eslint" then
-  --     vim.cmd.LspStop('eslint')
-  --     return
-  -- end
-
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
---   vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
-  vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
-  vim.keymap.set("n", "<leader>]", vim.diagnostic.goto_next, opts)
-  vim.keymap.set("n", "<leader>[", vim.diagnostic.goto_prev, opts)
-  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-  vim.keymap.set("n", "<leader>8", vim.lsp.buf.rename, opts)
-  vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
-end)
-
-lsp.setup()
-
-vim.diagnostic.config({
-    virtual_text = true,
-})
-
---     "flake8",
---     "black",
---     "isort"
---     "pydocstyle"
+}
