@@ -68,6 +68,7 @@ local i = ls.insert_node
 
 ls.add_snippets("python" , {
         s("f", fmt("def {}({}):\n    {}", {i(1, "func"), i(2, "arg"), i(0, "pass")})),
+        s("script", fmt("import argparse\n\nif __name__ == \"__main__\":\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"{}\")\n    args = parser.parse_args()", {i(1, "arg")})),
         -- s("expand", fmt("This does not expand dong", {}))
     }
 )
