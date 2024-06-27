@@ -54,12 +54,12 @@ vim.keymap.set("n", "<leader>q", "<cmd>q<CR>", map_opts)
 vim.keymap.set("n", "<leader>bn", "<cmd>bn<CR>", map_opts)
 vim.keymap.set("n", "<leader>bp", "<cmd>bp<CR>", map_opts)
 vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>", map_opts)
+vim.keymap.set("v", "<leader>y", '"+y', map_opts)
 vim.keymap.set("i", '"', '""<left>', map_opts)
 vim.keymap.set("i", '(', '()<left>', map_opts)
 vim.keymap.set("i", '{', '{}<left>', map_opts)
 vim.keymap.set("i", '[', '[]<left>', map_opts)
 -- Turn list of lines into snowflake
--- TODO Add copy command
 vim.keymap.set("n", "<leader>sf", "<cmd>% norm A,<CR><cmd>% norm I'<CR><cmd>% norm f,i'<CR>Gf,x", map_opts)
 
 -- PACKER
