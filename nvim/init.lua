@@ -48,12 +48,19 @@ vim.g.netrw_banner = 0
 vim.g.mapleader = " "
 local map_opts = {noremap=true}
 -- set(mode, lhs, rhs, opts)
-vim.keymap.set("n", "<leader>pv", "<cmd>Ex<CR>", map_opts)
+vim.keymap.set("n", "<leader>l", "<cmd>Ex<CR>", map_opts)
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", map_opts)
+vim.keymap.set("n", "<leader>q", "<cmd>q<CR>", map_opts)
+vim.keymap.set("n", "<leader>bn", "<cmd>bn<CR>", map_opts)
+vim.keymap.set("n", "<leader>bp", "<cmd>bp<CR>", map_opts)
+vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>", map_opts)
 vim.keymap.set("i", '"', '""<left>', map_opts)
 vim.keymap.set("i", '(', '()<left>', map_opts)
 vim.keymap.set("i", '{', '{}<left>', map_opts)
 vim.keymap.set("i", '[', '[]<left>', map_opts)
+-- Turn list of lines into snowflake
+-- TODO Add copy command
+vim.keymap.set("n", "<leader>sf", "<cmd>% norm A,<CR><cmd>% norm I'<CR><cmd>% norm f,i'<CR>Gf,x", map_opts)
 
 -- PACKER
 -- Only required if you have packer configured as `opt`
