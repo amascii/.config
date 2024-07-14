@@ -37,12 +37,12 @@ end
 require("mason").setup({})
 require("mason-lspconfig").setup({
   ensure_installed = {
-    "lua_ls",
-    "pyright",
+    "eslint",
     "gopls",
     "ltex",
-    "eslint",
+    "lua_ls",
     "marksman",
+    "pyright",
   },
   handlers = {default_setup},
 })
