@@ -12,6 +12,22 @@ Plugin settings go in `after/plugin/<plugin>.lua`
 File-specific settings go in `after/ftplugin/<file-type>.lua`
 --]]
 
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+        vim.api.nvim_echo({
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out, "WarningMsg" },
+            { "\nPress any key to exit..." },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
+    end
+end
+vim.opt.rtp:prepend(lazypath)
+
 -- SETS GO HERE
 vim.opt.guicursor = ""
 
@@ -46,7 +62,7 @@ vim.g.netrw_banner = 0
 
 -- REMAPPINGS GO HERE
 vim.g.mapleader = " "
-local map_opts = {noremap=true}
+local map_opts = { noremap = true }
 -- set(mode, lhs, rhs, opts)
 vim.keymap.set("n", "<leader>l", "<cmd>Ex<CR>", map_opts)
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", map_opts)
@@ -56,57 +72,78 @@ vim.keymap.set("n", "<leader>{", "<cmd>bp<CR>", map_opts)
 vim.keymap.set("n", "<leader>fd", "<cmd>bd<CR>", map_opts)
 vim.keymap.set("v", "<leader>y", '"+y', map_opts)
 vim.keymap.set("i", '"', '""<left>', map_opts)
-vim.keymap.set("i", '(', '()<left>', map_opts)
-vim.keymap.set("i", '{', '{}<left>', map_opts)
-vim.keymap.set("i", '[', '[]<left>', map_opts)
+vim.keymap.set("i", "(", "()<left>", map_opts)
+vim.keymap.set("i", "{", "{}<left>", map_opts)
+vim.keymap.set("i", "[", "[]<left>", map_opts)
 -- Turn list of lines into snowflake
 vim.keymap.set("n", "<leader>sf", "<cmd>% norm A,<CR><cmd>% norm I'<CR><cmd>% norm f,i'<CR>Gf,x", map_opts)
 
--- PACKER
--- Only required if you have packer configured as `opt`
-vim.cmd("packadd packer.nvim")
+-- Setup lazy.nvim
+require("lazy").setup({
+    spec = {
+        { "echasnovski/mini.surround", version = false },
+        { "nvim-treesitter/nvim-treesitter" },
+        { "nvim-telescope/telescope.nvim" },
+        { "marko-cerovac/material.nvim" },
+        { "neovim/nvim-lspconfig" },
+        { "williamboman/mason.nvim" },
+        { "williamboman/mason-lspconfig.nvim" },
+        { "hrsh7th/nvim-cmp" },
+        { "hrsh7th/cmp-buffer" },
+        { "hrsh7th/cmp-path" },
+        { "hrsh7th/cmp-nvim-lsp" },
+        { "hrsh7th/cmp-nvim-lua" },
+        { "saadparwaiz1/cmp_luasnip" },
+        { "L3MON4D3/LuaSnip", dependencies = { "rafamadriz/friendly-snippets" } },
+        { "nvim-lualine/lualine.nvim" },
+        -- use {
+        --     "nvim-lualine/lualine.nvim",
+        --     requires = { "nvim-tree/nvim-web-devicons", opt = true }
+        -- }
+    },
+    -- Configure any other settings here. See the documentation for more details.
+    -- colorscheme that will be used when installing plugins.
+    install = { colorscheme = { "habamax" } },
+    -- automatically check for plugin updates
+    checker = { enabled = true },
+})
 
-require("packer").startup(function(use)
-    -- Packer can manage itself
-    use "wbthomason/packer.nvim"
-    use "tpope/vim-surround"
-    -- use "ellisonleao/gruvbox.nvim"
-    use "marko-cerovac/material.nvim"
-    -- brew install ripgrep
-    use {
-        "nvim-telescope/telescope.nvim", tag = "0.1.3",
-        -- or                            , branch = "0.1.x",
-        requires = { {"nvim-lua/plenary.nvim"} }
-    }
-    use("nvim-treesitter/nvim-treesitter", {run = ":TSUpdate"})
+require("mini.surround").setup({
+    mappings = {
+        -- add = "sa"
+        -- delete = "sd"
+        find = "",
+        find_left = "",
+        highlight = "",
+        -- replace = "sr"
+        update_n_lines = "",
+        suffix_last = "",
+        suffix_next = "",
+    },
+})
 
-    -- LSP Support
-    -- npm install -g pyright
-    -- pip install pyright
-    use "neovim/nvim-lspconfig"
-    use "williamboman/mason.nvim"
-    use "williamboman/mason-lspconfig.nvim"
+-- brew install ripgrep
+-- use {
+--     "nvim-telescope/telescope.nvim", tag = "0.1.3",
+--     -- or                            , branch = "0.1.x",
+--     requires = { {"nvim-lua/plenary.nvim"} }
+-- }
+-- use("nvim-treesitter/nvim-treesitter", {run = ":TSUpdate"})
+-- LSP Support
+-- use "neovim/nvim-lspconfig"
+-- use "williamboman/mason.nvim"
+-- use "williamboman/mason-lspconfig.nvim"
 
-    -- Autocompletion
-    use "hrsh7th/nvim-cmp"
-    use "hrsh7th/cmp-buffer"
-    use "hrsh7th/cmp-path"
-    use "hrsh7th/cmp-nvim-lsp"
-    use "hrsh7th/cmp-nvim-lua"
-    use "saadparwaiz1/cmp_luasnip"
+-- Autocompletion
+-- use "hrsh7th/nvim-cmp"
+-- use "hrsh7th/cmp-buffer"
+-- use "hrsh7th/cmp-path"
+-- use "hrsh7th/cmp-nvim-lsp"
+-- use "hrsh7th/cmp-nvim-lua"
+-- use "saadparwaiz1/cmp_luasnip"
 
-    -- Snippets
-    use "L3MON4D3/LuaSnip"
-    use "rafamadriz/friendly-snippets"
-
-    -- use {
-    --     "VonHeikemen/lsp-zero.nvim",
-    --     requires = {
-    --     }
-    -- }
-
-    use {
-        "nvim-lualine/lualine.nvim",
-        requires = { "nvim-tree/nvim-web-devicons", opt = true }
-    }
-end)
+-- use {
+--     "nvim-lualine/lualine.nvim",
+--     requires = { "nvim-tree/nvim-web-devicons", opt = true }
+-- }
+-- end)
