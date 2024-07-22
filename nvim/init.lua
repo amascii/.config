@@ -71,10 +71,10 @@ vim.keymap.set("n", "<leader>}", "<cmd>bn<CR>", map_opts)
 vim.keymap.set("n", "<leader>{", "<cmd>bp<CR>", map_opts)
 vim.keymap.set("n", "<leader>fd", "<cmd>bd<CR>", map_opts)
 vim.keymap.set("v", "<leader>y", '"+y', map_opts)
-vim.keymap.set("i", '"', '""<left>', map_opts)
-vim.keymap.set("i", "(", "()<left>", map_opts)
-vim.keymap.set("i", "{", "{}<left>", map_opts)
-vim.keymap.set("i", "[", "[]<left>", map_opts)
+-- vim.keymap.set("i", '"', '""<left>', map_opts)
+-- vim.keymap.set("i", "(", "()<left>", map_opts)
+-- vim.keymap.set("i", "{", "{}<left>", map_opts)
+-- vim.keymap.set("i", "[", "[]<left>", map_opts)
 -- Turn list of lines into snowflake
 vim.keymap.set("n", "<leader>sf", "<cmd>% norm A,<CR><cmd>% norm I'<CR><cmd>% norm f,i'<CR>Gf,x", map_opts)
 
@@ -82,6 +82,7 @@ vim.keymap.set("n", "<leader>sf", "<cmd>% norm A,<CR><cmd>% norm I'<CR><cmd>% no
 require("lazy").setup({
     spec = {
         { "echasnovski/mini.surround", version = false },
+        { "echasnovski/mini.pairs", version = false },
         { "nvim-treesitter/nvim-treesitter" },
         { "nvim-telescope/telescope.nvim" },
         { "marko-cerovac/material.nvim" },
@@ -122,6 +123,8 @@ require("mini.surround").setup({
     },
 })
 
+require("mini.pairs").setup()
+
 -- brew install ripgrep
 -- use {
 --     "nvim-telescope/telescope.nvim", tag = "0.1.3",
@@ -141,7 +144,6 @@ require("mini.surround").setup({
 -- use "hrsh7th/cmp-nvim-lsp"
 -- use "hrsh7th/cmp-nvim-lua"
 -- use "saadparwaiz1/cmp_luasnip"
-
 -- use {
 --     "nvim-lualine/lualine.nvim",
 --     requires = { "nvim-tree/nvim-web-devicons", opt = true }
