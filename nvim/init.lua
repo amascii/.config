@@ -119,7 +119,7 @@ require("lualine").setup()
 
 -- COLOR BG
 vim.g.material_style = "darker"
-vim.cmd.colorscheme "material"
+vim.cmd.colorscheme("material")
 
 -- brew install ripgrep
 -- use {
