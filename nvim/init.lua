@@ -78,6 +78,7 @@ require("lazy").setup({
         { "echasnovski/mini.surround", version = false },
         { "echasnovski/mini.pairs", version = false },
         { "nvim-treesitter/nvim-treesitter" },
+        -- brew install ripgrep
         { "nvim-telescope/telescope.nvim" },
         { "marko-cerovac/material.nvim" },
         { "neovim/nvim-lspconfig" },
@@ -96,9 +97,10 @@ require("lazy").setup({
     -- colorscheme that will be used when installing plugins.
     install = { colorscheme = { "habamax" } },
     -- automatically check for plugin updates
-    checker = { enabled = true },
+    checker = { enabled = false },
 })
 
+-- Setup plugins
 require("mini.surround").setup({
     mappings = {
         -- add = "sa"
@@ -112,9 +114,7 @@ require("mini.surround").setup({
         suffix_next = "",
     },
 })
-
 require("mini.pairs").setup()
-
 require("lualine").setup()
 
 -- COLOR BG
@@ -127,10 +127,3 @@ vim.keymap.set("n", "<leader>pg", telescope_builtin.git_files, {})
 vim.keymap.set("n", "<leader>ps", function()
     telescope_builtin.grep_string({ search = vim.fn.input("Grep > ") })
 end)
--- brew install ripgrep
--- use {
---     "nvim-telescope/telescope.nvim", tag = "0.1.3",
---     -- or                            , branch = "0.1.x",
---     requires = { {"nvim-lua/plenary.nvim"} }
--- }
--- use("nvim-treesitter/nvim-treesitter", {run = ":TSUpdate"})
