@@ -115,6 +115,12 @@ require("mini.surround").setup({
 
 require("mini.pairs").setup()
 
+require("lualine").setup()
+
+-- COLOR BG
+vim.g.material_style = "darker"
+vim.cmd.colorscheme "material"
+
 -- brew install ripgrep
 -- use {
 --     "nvim-telescope/telescope.nvim", tag = "0.1.3",
