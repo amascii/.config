@@ -3,10 +3,6 @@ Neovim expects config files in `~/.config/nvim/`
 If `.config` already exists, just add the `nvim` folder inside
 
 General setting, remappings, and plugin management goes here
-We use Packer to install plugins; check out the Quickstart
-https://github.com/wbthomason/packer.nvim
-
-:so this file to run Packer commands (PackerInstall, PackerSync, etc.)
 
 Plugin settings go in `after/plugin/<plugin>.lua`
 File-specific settings go in `after/ftplugin/<file-type>.lua`
@@ -43,12 +39,10 @@ vim.g.pyindent_nested_paren = "shiftwidth()"
 vim.g.pyindent_continue = "shiftwidth()"
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
-
 vim.opt.foldmethod = "indent"
 vim.opt.foldenable = false
 
 -- vim.opt.smartindent = true
-
 -- vim.opt.wrap = false
 
 vim.opt.cursorcolumn = true
@@ -97,10 +91,6 @@ require("lazy").setup({
         { "saadparwaiz1/cmp_luasnip" },
         { "L3MON4D3/LuaSnip", dependencies = { "rafamadriz/friendly-snippets" } },
         { "nvim-lualine/lualine.nvim" },
-        -- use {
-        --     "nvim-lualine/lualine.nvim",
-        --     requires = { "nvim-tree/nvim-web-devicons", opt = true }
-        -- }
     },
     -- Configure any other settings here. See the documentation for more details.
     -- colorscheme that will be used when installing plugins.
@@ -132,20 +122,3 @@ require("mini.pairs").setup()
 --     requires = { {"nvim-lua/plenary.nvim"} }
 -- }
 -- use("nvim-treesitter/nvim-treesitter", {run = ":TSUpdate"})
--- LSP Support
--- use "neovim/nvim-lspconfig"
--- use "williamboman/mason.nvim"
--- use "williamboman/mason-lspconfig.nvim"
-
--- Autocompletion
--- use "hrsh7th/nvim-cmp"
--- use "hrsh7th/cmp-buffer"
--- use "hrsh7th/cmp-path"
--- use "hrsh7th/cmp-nvim-lsp"
--- use "hrsh7th/cmp-nvim-lua"
--- use "saadparwaiz1/cmp_luasnip"
--- use {
---     "nvim-lualine/lualine.nvim",
---     requires = { "nvim-tree/nvim-web-devicons", opt = true }
--- }
--- end)
