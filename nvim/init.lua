@@ -56,6 +56,8 @@ vim.g.netrw_banner = 0
 
 -- REMAPPINGS GO HERE
 vim.g.mapleader = " "
+
+-- non-recursive map
 local map_opts = { noremap = true }
 -- set(mode, lhs, rhs, opts)
 vim.keymap.set("n", "<leader>l", "<cmd>Ex<CR>", map_opts)
@@ -65,12 +67,9 @@ vim.keymap.set("n", "<leader>}", "<cmd>bn<CR>", map_opts)
 vim.keymap.set("n", "<leader>{", "<cmd>bp<CR>", map_opts)
 vim.keymap.set("n", "<leader>fd", "<cmd>bd<CR>", map_opts)
 vim.keymap.set("v", "<leader>y", '"+y', map_opts)
--- vim.keymap.set("i", '"', '""<left>', map_opts)
--- vim.keymap.set("i", "(", "()<left>", map_opts)
--- vim.keymap.set("i", "{", "{}<left>", map_opts)
--- vim.keymap.set("i", "[", "[]<left>", map_opts)
+
 -- Turn list of lines into snowflake
-vim.keymap.set("n", "<leader>sf", "<cmd>% norm A,<CR><cmd>% norm I'<CR><cmd>% norm f,i'<CR>Gf,x", map_opts)
+-- vim.keymap.set("n", "<leader>sf", "<cmd>% norm A,<CR><cmd>% norm I'<CR><cmd>% norm f,i'<CR>Gf,x", map_opts)
 
 -- Setup lazy.nvim
 require("lazy").setup({
