@@ -36,7 +36,7 @@ require("mason-lspconfig").setup({
     ensure_installed = {
         "eslint",
         "gopls",
-        "ltex",
+        -- "ltex",
         "lua_ls",
         "marksman",
         "pyright",
